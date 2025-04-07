@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pais</title>
+</head>
+<body>
+
+<table>
+    <tr><th>Pais</th><th>Region</th></tr>
+    <tr>
+        <td  th:text="${pais.nombre}"></td>
+        <td  th:text="${pais.region.nombre}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
