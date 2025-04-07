@@ -7,9 +7,7 @@ import com.proyectoClase.springHR.repositories.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,5 +42,26 @@ public class PaisController {
 
     }
 
+
+    @GetMapping("/nuevo")
+    public String irFormularioNuevoPais(Model model){
+
+
+        return "t_nuevo_pais";
+
+    }
+
+    @PostMapping
+    public String crearPais(@RequestParam(name = "idPais") String id,
+                            @RequestParam String nombrePais,
+                            @RequestParam Integer idRegion,Model model){
+
+       Pais pais= servicio.savePais(id,nombrePais,idRegion);
+
+       model.addAttribute("pais",pais);
+
+       return "t_pais";
+
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.proyectoClase.springHR.admin;
 
 import com.proyectoClase.springHR.entities.Pais;
+import com.proyectoClase.springHR.entities.Region;
 import com.proyectoClase.springHR.repositories.PaisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,9 @@ public class PaisAdmin implements ServPaisAdmin{
         Pais pais = new Pais();
         pais.setId(idPais);
         pais.setNombre(nombre);
-        pais.getRegion().setId(idRegion);
+        Region region = new Region();
+        region.setId(idRegion);
+        pais.setRegion(region);
         return repository.save(pais);
     }
 }
