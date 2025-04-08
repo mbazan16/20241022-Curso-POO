@@ -5,7 +5,9 @@
     <title>Paises</title>
 </head>
 <body>
-
+<div>
+    <a th:href="@{'/pais/nuevo'}"><img width="15" height="15" src="https://img.icons8.com/color/48/add--v1.png" alt="add--v1"/>Nuevo pais</a>
+</div>
 <table>
     <tr><th>Paises</th></tr>
     <tr th:each=" pepito:${listado}">

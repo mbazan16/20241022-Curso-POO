@@ -1,5 +1,6 @@
 package com.proyectoClase.springHR.controllers;
 
+import com.proyectoClase.springHR.admin.ServComunAdmin;
 import com.proyectoClase.springHR.admin.ServPaisAdmin;
 import com.proyectoClase.springHR.entities.Pais;
 import com.proyectoClase.springHR.entities.Region;
@@ -18,10 +19,13 @@ public class PaisController {
     @Autowired
     ServPaisAdmin servicio;
 
+    @Autowired
+    ServComunAdmin servicioComun;
+
     @GetMapping
     public String listadoPaises(Model model){
 
-        List<Pais> paises=servicio.listPaises();
+        List<Pais> paises=servicioComun.listPaises();
 
         model.addAttribute("listado",paises);
 
@@ -45,8 +49,9 @@ public class PaisController {
 
     @GetMapping("/nuevo")
     public String irFormularioNuevoPais(Model model){
+        List<Region> regiones = servicioComun.listaRegiones();
 
-
+        model.addAttribute("regiones",regiones);
         return "t_nuevo_pais";
 
     }

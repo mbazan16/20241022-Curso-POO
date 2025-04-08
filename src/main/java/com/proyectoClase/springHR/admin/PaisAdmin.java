@@ -15,11 +15,6 @@ public class PaisAdmin implements ServPaisAdmin{
     PaisRepository repository;
 
     @Override
-    public List<Pais> listPaises() {
-        return repository.findAll();
-    }
-
-    @Override
     public Pais getPais(String id) {
         return repository.findById(id).get();
     }
