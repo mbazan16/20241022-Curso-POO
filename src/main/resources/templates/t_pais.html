@@ -7,12 +7,16 @@
 <body>
 
 <table>
-    <tr><th>Pais</th><th>Region</th></tr>
+    <tr><th>Codigo</th><th>Pais</th><th>Region</th></tr>
     <tr>
+        <td  th:text="${pais.id}"></td>
         <td  th:text="${pais.nombre}"></td>
         <td  th:text="${pais.region.nombre}"></td>
     </tr>
 </table>
+<div>
+    <a th:href="@{'/pais/modificar/'+${pais.id}}"><img width="15" height="15" src="https://img.icons8.com/color/48/pencil--v1.png" alt="pencil--v1"/>Modificar pais</a>
+</div>
 
 </body>
 </html>

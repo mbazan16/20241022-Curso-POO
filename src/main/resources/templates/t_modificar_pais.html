@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modificar pais</title>
+</head>
+<body>
+<h2>Modificar pais</h2>
+<form method="post" th:action="@{'/pais/modificar'}">
+    <label for="id">Identificador:</label>
+    <input type="text" id="id" name="id" th:value="${pais.id}"/>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" th:value="${pais.nombre}"/>
+    <label for="idRegion">Region:</label>
+    <select id="idRegion" name="region.id" >
+        <option th:each="region:${regiones}" th:value="${region.id}" th:text="${region.nombre}"
+                th:selected="${region} == ${pais.region}"></option>
+    </select>
+    <button>Enviar</button>
+
+</form>
+
+</body>
+</html>
