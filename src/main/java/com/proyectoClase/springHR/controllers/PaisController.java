@@ -4,6 +4,8 @@ import com.proyectoClase.springHR.admin.ServComunAdmin;
 import com.proyectoClase.springHR.admin.ServPaisAdmin;
 import com.proyectoClase.springHR.entities.Pais;
 import com.proyectoClase.springHR.entities.Region;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,14 +17,18 @@ import java.util.List;
 @RequestMapping("/pais")
 public class PaisController {
 
+    public static Logger log = LoggerFactory.getLogger(PaisController.class);
+
     @Autowired
     ServPaisAdmin servicio;
 
     @Autowired
     ServComunAdmin servicioComun;
 
+
     @GetMapping
     public String listadoPaises(Model model){
+        log.info("[listadoPaises]");
 
         List<Pais> paises=servicioComun.listPaises();
 
@@ -35,9 +41,11 @@ public class PaisController {
 
     @GetMapping("/{id}")
     public String verPais(@PathVariable(name="id") String id, Model model){
+        log.info("[verPais]");
+        log.debug("[id:"+id+"]");
 
         Pais pais = servicio.getPais(id);
-
+        log.debug("[pais:"+pais.toString()+"]");
 
         model.addAttribute("pais",pais);
 
@@ -48,6 +56,7 @@ public class PaisController {
 
     @GetMapping("/nuevo")
     public String irFormularioNuevoPais(Model model){
+        log.info("[irFormularioNuevoPais]");
         listaRegiones(model);
         return "t_nuevo_pais";
 
@@ -57,6 +66,7 @@ public class PaisController {
     public String crearPais(@RequestParam(name = "idPais") String id,
                             @RequestParam String nombrePais,
                             @RequestParam Integer idRegion,Model model){
+        log.info("[crearPais]");
 
        Pais pais= servicio.savePais(id,nombrePais,idRegion);
        model.addAttribute("pais",pais);
@@ -67,6 +77,7 @@ public class PaisController {
 
     @GetMapping("/modificar/{id}")
     public String irFormularioModificarPais(@PathVariable String id, Model model){
+        log.info("[irFormularioModificarPais]");
         Pais pais = servicio.getPais(id);
 
         model.addAttribute("pais",pais);
@@ -79,6 +90,7 @@ public class PaisController {
 
     @PostMapping("/modificar")
     public String modificarPais(@ModelAttribute Pais pais, Model model){
+        log.info("[modificarPais]");
 
         Pais paisAux= servicio.savePais(pais);
 
