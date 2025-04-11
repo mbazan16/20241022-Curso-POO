@@ -2,6 +2,7 @@ package com.proyectoClase.springHR.controllers;
 
 import com.proyectoClase.springHR.admin.ServComunAdmin;
 import com.proyectoClase.springHR.admin.ServDireccionAdmin;
+import com.proyectoClase.springHR.admin.exceptions.AdminException;
 import com.proyectoClase.springHR.entities.Direccion;
 import com.proyectoClase.springHR.entities.Pais;
 import org.slf4j.Logger;
@@ -30,7 +31,7 @@ public class DireccionController {
     ServComunAdmin servicioComun;
 
     @GetMapping
-    public String buscadorDirecciones(@RequestParam(name="idPais",required = false) String idPais, Model model){
+    public String buscadorDirecciones(@RequestParam(name="idPais",required = false) String idPais, Model model) throws AdminException {
         log.info("[buscadorDirecciones]");
         log.debug("[idPais:/"+idPais+"/]");
 

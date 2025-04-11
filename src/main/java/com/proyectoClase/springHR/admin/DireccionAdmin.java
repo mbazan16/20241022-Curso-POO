@@ -1,5 +1,6 @@
 package com.proyectoClase.springHR.admin;
 
+import com.proyectoClase.springHR.admin.exceptions.AdminException;
 import com.proyectoClase.springHR.entities.Direccion;
 import com.proyectoClase.springHR.repositories.DireccionRepository;
 import org.slf4j.Logger;
@@ -22,9 +23,15 @@ public class DireccionAdmin implements ServDireccionAdmin{
     }
 
     @Override
-    public List<Direccion> listaDirecciones(String idPais) {
+    public List<Direccion> listaDirecciones(String idPais) throws AdminException{
         log.info("[listaDirecciones]");
         log.debug("[idPais:"+idPais+"]");
-        return repositorio.findAllByPais_Id(idPais);
+
+        try {
+            return repositorio.findAllByPais_Id(idPais);
+        }catch(Exception e){
+            log.error(e.getMessage(),e);
+            throw new AdminException();
+        }
     }
 }

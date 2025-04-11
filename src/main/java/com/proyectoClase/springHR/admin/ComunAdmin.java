@@ -1,5 +1,6 @@
 package com.proyectoClase.springHR.admin;
 
+import com.proyectoClase.springHR.admin.exceptions.AdminException;
 import com.proyectoClase.springHR.entities.Direccion;
 import com.proyectoClase.springHR.entities.Pais;
 import com.proyectoClase.springHR.entities.Region;
@@ -34,14 +35,26 @@ public class ComunAdmin implements ServComunAdmin{
     }
 
     @Override
-    public List<Region> listaRegiones() {
+    public List<Region> listaRegiones() throws AdminException {
         log.info("[listaRegiones]");
-        return  repoRegion.findAll();
+
+        try {
+            return repoRegion.findAll();
+        }catch(Exception e){
+            log.error(e.getMessage(),e);
+            throw new AdminException();
+        }
     }
 
     @Override
-    public List<Direccion> listaDirecciones() {
+    public List<Direccion> listaDirecciones() throws AdminException{
         log.info("[listaDirecciones]");
-        return repoDireccion.findAll();
+
+        try {
+            return repoDireccion.findAll();
+        }catch(Exception e){
+            log.error(e.getMessage(),e);
+            throw new AdminException();
+        }
     }
 }
