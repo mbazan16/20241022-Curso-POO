@@ -5,11 +5,13 @@ import com.proyectoClase.springHR.admin.ServPaisAdmin;
 import com.proyectoClase.springHR.admin.exceptions.AdminException;
 import com.proyectoClase.springHR.entities.Pais;
 import com.proyectoClase.springHR.entities.Region;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -90,10 +92,15 @@ public class PaisController {
 
 
     @PostMapping("/modificar")
-    public String modificarPais(@ModelAttribute Pais pais, Model model) {
+    public String modificarPais(@Valid @ModelAttribute Pais pais, BindingResult result, Model model) {
         log.info("[modificarPais]");
         
         try {
+            if(result.hasErrors()){
+                log.debug("Errors: pais no valido");
+                listaRegiones(model);
+                return "t_modificar_pais";
+            }
 
             Pais paisAux = servicio.savePais(pais);
             model.addAttribute("pais", paisAux);

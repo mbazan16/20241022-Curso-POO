@@ -6,17 +6,19 @@
 </head>
 <body>
 <h2>Modificar pais</h2>
-<form method="post" th:action="@{'/pais/modificar'}">
+<form method="post" th:action="@{'/pais/modificar'}" th:object="${pais}">
     <label for="id">Identificador:</label>
     <input type="text" id="id" name="id" th:value="${pais.id}" readonly/>
     <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" th:value="${pais.nombre}"/>
+    <input type="text"  id="nombre" th:field="*{nombre}"  th:value="${pais.nombre}"/>
+
     <label for="idRegion">Region:</label>
     <select id="idRegion" name="region.id" >
         <option th:each="region:${regiones}" th:value="${region.id}" th:text="${region.nombre}"
                 th:selected="${region} == ${pais.region}"></option>
     </select>
     <button>Enviar</button>
+    <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 
 </form>
 <div class="error" th:if="${mensaje}">
